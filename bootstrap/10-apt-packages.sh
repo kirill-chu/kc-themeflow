@@ -13,6 +13,7 @@
 #
 # Requires: sudo, python3 with tomllib (Python 3.11+).
 #
+
 set -euo pipefail
 
 # ─── Paths ────────────────────────────────────────────────────

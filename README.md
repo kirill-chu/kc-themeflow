@@ -56,7 +56,7 @@ Options:
 ```
 -i <file>          wallpaper
 -f <file>          prepared pywal JSON palette
---hover=soft       Kvantum hover style: soft (default) or border
+--hover=fill       Kvantum hover style: fill (default) or text
 --no-wallpaper     apply theme only, do not set the wallpaper
 ```
 

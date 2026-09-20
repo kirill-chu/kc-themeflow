@@ -10,6 +10,7 @@
 # Assumes flatpak was installed by bootstrap/10-apt-packages.sh.
 # Idempotent: safe to run multiple times.
 #
+
 set -euo pipefail
 
 # ─── Paths ────────────────────────────────────────────────────

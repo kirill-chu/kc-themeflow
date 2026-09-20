@@ -13,6 +13,7 @@ Supported input formats:
 
 Output format: pywal16 JSON (see docs/themes.md, §2).
 """
+
 import argparse
 import json
 import sys

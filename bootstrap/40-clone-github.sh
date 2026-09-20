@@ -12,6 +12,7 @@
 #
 # Idempotent: safe to run multiple times.
 #
+
 set -euo pipefail
 
 # Prevent git from prompting for credentials in non-interactive runs.

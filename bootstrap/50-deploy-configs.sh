@@ -22,6 +22,7 @@
 #
 # Idempotent: safe to run multiple times.
 #
+
 set -euo pipefail
 
 # ─── Flag parsing ─────────────────────────────────────────────

@@ -12,6 +12,7 @@
 # Requires: bootstrap/00-preflight.sh has passed, bootstrap/10-apt-packages.sh
 # has installed curl and python3.
 #
+
 set -euo pipefail
 
 # ─── Paths ────────────────────────────────────────────────────

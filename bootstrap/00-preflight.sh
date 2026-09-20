@@ -10,6 +10,7 @@
 #   0  all checks passed (warnings allowed)
 #   1  one or more checks failed
 #
+
 set -euo pipefail
 
 # ─── Output helpers ───────────────────────────────────────────

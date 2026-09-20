@@ -24,6 +24,7 @@ Usage in the Qtile config:
 
 This file is overwritten on every theme change. Do not edit it by hand.
 """
+
 import json
 from pathlib import Path
 

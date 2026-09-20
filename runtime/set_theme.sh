@@ -6,17 +6,18 @@
 # and applies it to every supported application in the environment.
 #
 # Usage:
-#   set_theme.sh -i /path/to/wallpaper.jpg
-#   set_theme.sh -f /path/to/theme.json
-#   set_theme.sh -i wall.jpg --hover=border --no-wallpaper
+#   kc-themeflow -i /path/to/wallpaper.jpg
+#   kc-themeflow -f /path/to/theme.json
+#   kc-themeflow -i wall.jpg --hover=border --no-wallpaper
 #
 # Options:
 #   -i <file>          Generate palette from image and set as wallpaper
 #   -f <file>          Use palette from a prepared pywal JSON file
-#   --hover=soft       Kvantum hover style: soft (default) or border
+#   --hover=fill       Kvantum hover style: fill (default) or text
 #   --no-wallpaper     With -i, apply theme only; do not set wallpaper
 #   -h, --help         Show this help
 #
+
 set -euo pipefail
 
 # ─── Paths ────────────────────────────────────────────────────
@@ -186,7 +187,7 @@ fi
 # Restart dunst entirely. SIGUSR1 only reloads the config dunst
 # already has in memory; it does not re-resolve the config path.
 # stderr is redirected so warnings (e.g. missing icons) do not
-# leak into the terminal that invoked set_theme.sh.
+# leak into the terminal that invoked kc-themeflow.
 pkill -x dunst 2>/dev/null || true
 sleep 0.2
 dunst >/dev/null 2>&1 &
