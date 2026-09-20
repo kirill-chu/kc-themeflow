@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────────
+# kc-themeflow — color integration
+#
+# Add the import below near the top of your config.py. The four
+# names come from ~/.config/qtile/custom_utils/colors.py, which is
+# regenerated on every theme change.
+#
+#   background   – window background color
+#   foreground   – text / foreground color
+#   cursor       – accent color (green by default, matches Qt / rofi)
+#   palette[0..15]  – the 16 ANSI colors
+#
+# The examples below show typical usage. Adapt them to your config.
+# ─────────────────────────────────────────────────────────────
+
+from custom_utils.colors import background, foreground, cursor, palette
+
+# Example: layouts
+# -----------------
+# layout.MonadTall(
+#     border_focus=palette[5],       # magenta
+#     border_normal=background,
+#     border_width=2,
+# )
+# layout.Max(
+#     border_focus=palette[5],
+#     border_normal=background,
+# )
+
+# Example: bar widgets
+# --------------------
+# widget.GroupBox(
+#     active=foreground,
+#     this_current_screen_border=palette[4],    # blue
+#     this_screen_border=palette[4],
+#     urgent_border=palette[1],                 # red
+#     other_current_screen_border=palette[3],   # yellow
+#     other_screen_border=palette[3],
+#     block_highlight_text_color=background,
+# )
+# widget.Sep(foreground=palette[0])             # black
+# widget.Battery(low_background=palette[1])     # red
+
+# Example: floating windows
+# -------------------------
+# floating_layout = layout.Floating(
+#     border_focus=palette[13],      # bright magenta
+#     border_normal=background,
+# )
+
+# Example: widget defaults
+# ------------------------
+# widget_defaults = dict(
+#     font="UbuntuMono Nerd Font",
+#     fontsize=14,
+#     padding=2,
+#     foreground=foreground,
+# )

@@ -1,0 +1,15 @@
+# ~/.xsessionrc
+#
+# Read by LightDM before the X session starts. Every process in the
+# session inherits these variables: Qtile, terminals, rofi, everything.
+#
+# This file is managed by kc-themeflow. Manual edits will be overwritten
+# on the next install.sh run.
+
+# Make ~/.local/bin available to every session process.
+export PATH="$HOME/.local/bin:$PATH"
+
+# Qt: use Kvantum as the widget style, no platform theme override.
+# Kvantum provides both widgets and palette; qt6ct/qt5ct are not used.
+export QT_QPA_PLATFORMTHEME=
+export QT_STYLE_OVERRIDE=kvantum

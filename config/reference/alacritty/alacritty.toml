@@ -1,0 +1,25 @@
+# kc-themeflow — reference Alacritty configuration.
+#
+# The color theme is imported from current-theme.toml, which is
+# regenerated on every theme change. Do not edit current-theme.toml
+# by hand — it will be overwritten.
+#
+# To integrate this into an existing Alacritty config: ensure your
+# [general] section contains:
+#
+#     import = ["current-theme.toml"]
+
+[general]
+import = ["current-theme.toml"]
+
+[font]
+normal = { family = "UbuntuMono Nerd Font", style = "Regular" }
+bold = { family = "UbuntuMono Nerd Font", style = "Bold" }
+italic = { family = "UbuntuMono Nerd Font", style = "Italic" }
+bold_italic = { family = "UbuntuMono Nerd Font", style = "Bold Italic" }
+
+[selection]
+save_to_clipboard = true
+
+[env]
+TERM = "xterm-256color"

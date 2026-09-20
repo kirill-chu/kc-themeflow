@@ -1,0 +1,20 @@
+/**
+ * kc-themeflow — reference Rofi configuration.
+ *
+ * The active theme is loaded from current-theme.rasi, which is
+ * regenerated on every theme change. Do not edit current-theme.rasi
+ * by hand — it will be overwritten.
+ */
+
+configuration {
+    modi: "window,drun,ssh,combi";
+    font: "hack 10";
+    combi-modi: "window,drun,ssh";
+    display-ssh:    "";
+    display-run:    "";
+    display-drun:   "";
+    display-window: "";
+    display-combi:  "";
+    show-icons:     true;
+}
+@theme "kanagawa-paper.rasi"

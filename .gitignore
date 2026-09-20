@@ -1,0 +1,81 @@
+# ─────────────────────────────────────────────────────────────
+# kc-themeflow — git ignore rules
+# ─────────────────────────────────────────────────────────────
+
+# Local user data — never commit
+wallpapers/
+githubs/
+themes/palettes/
+themes/sources/
+tools/output/
+preferences.toml
+local/
+*.local.toml
+tools/*.json
+_*.*
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.#*
+\#*\#
+.\#*
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build artifacts from adw-gtk3 (when cloned into the project tree)
+builddir/
+_build/
+
+# Local backups and temporary files
+*.bak
+*.bak.*
+*.tmp
+*.swp
+
+# Logs
+*.log
+
+# Local overrides — keep them out of the repo
+preferences.toml
+local/
+
+# Sensitive data
+*.key
+*.pem
+*.secret
+credentials.toml

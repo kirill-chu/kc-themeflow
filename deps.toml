@@ -1,0 +1,175 @@
+# ═══════════════════════════════════════════════════════════════
+# kc-themeflow — dependency manifest
+#
+# Read by install.sh and bootstrap/*.sh. Change dependencies here,
+# not in scripts.
+# ═══════════════════════════════════════════════════════════════
+
+[meta]
+name = "kc-themeflow"
+version = "0.1.0"
+description = """
+Unified color theme system for Debian + X11 + Qtile.
+Generates a palette from a wallpaper or a prepared JSON file and
+applies it across the environment: Qtile, GTK3/GTK4, Qt (Kvantum),
+Alacritty, Rofi, Dunst, Neovim, Chromium, VSCode, LibreOffice.
+"""
+target = "debian-13"
+session = "X11 + LightDM"
+tested_wm = "qtile"
+license = "MIT"
+author = "kirill-chu"
+
+# ═══════════════════════════════════════════════════════════════
+# PATHS
+# ═══════════════════════════════════════════════════════════════
+
+[paths]
+# Directory where external repositories are cloned
+# (adw-gtk3, pywal16-libadwaita, pywalium).
+#
+# Leave empty to be prompted on first run. The chosen value is saved
+# to ~/.config/kc-themeflow/preferences.toml, which is outside the
+# git repository and takes precedence over this value.
+#
+# Supports:
+#   ~/githubs            -> /home/user/githubs
+#   githubs              -> /home/user/githubs        (relative to $HOME)
+#   $HOME/repos          -> /home/user/repos
+#   /opt/kc-src          -> as-is
+github_dir = ""
+
+# ═══════════════════════════════════════════════════════════════
+# APT — system packages
+# ═══════════════════════════════════════════════════════════════
+
+[apt.required]
+# Mandatory. install.sh fails if any of these cannot be installed.
+packages = [
+    "git",
+    "curl",
+    "meson",
+    "ninja-build",
+    "sassc",
+    "qt-style-kvantum",
+    "qt-style-kvantum-themes",
+    "qt-style-kvantum-l10n",
+    "flatpak",
+]
+
+[apt.optional]
+# Installed silently if missing, left alone if already present.
+packages = [
+    "feh",
+    "qt6ct",
+    "alacritty",
+    "dunst",
+    "rofi",
+]
+
+[apt.present]
+# Presence-only packages: kc-themeflow does not install them, only
+# checks that they exist and warns if they don't.
+#
+# Currently empty. Kept as a placeholder.
+packages = []
+
+# ═══════════════════════════════════════════════════════════════
+# UV — Python tooling
+# ═══════════════════════════════════════════════════════════════
+
+[uv.bootstrap]
+# Installed before anything else; used to install pywal16.
+installer_url = "https://astral.sh/uv/install.sh"
+
+[uv.tools]
+# Installed via `uv tool install <spec> <name>` — ends up in ~/.local/bin.
+pywal16 = "git+https://github.com/eylles/pywal16.git"
+
+# ═══════════════════════════════════════════════════════════════
+# FLATPAK
+# ═══════════════════════════════════════════════════════════════
+
+[flatpak.remote]
+name = "flathub"
+url  = "https://flathub.org/repo/flathub.flatpakrepo"
+
+[flatpak.apps]
+required = [
+    "com.github.GradienceTeam.Gradience",
+]
+
+# ═══════════════════════════════════════════════════════════════
+# GIT — repositories to clone
+# ═══════════════════════════════════════════════════════════════
+
+[git.adw-gtk3]
+url    = "https://github.com/lassekongo83/adw-gtk3.git"
+tag    = "v5.10"
+action = "meson-install"
+prefix = "$HOME/.local"
+note   = "GTK3 theme emulating libadwaita. Required by Gradience. Pinned to v5.10 because newer versions need Dart Sass, which is not in Debian 13 apt."
+
+[git.pywal16-libadwaita]
+url    = "https://github.com/eylles/pywal16-libadwaita.git"
+action = "copy-files"
+files  = ["templates/pywal.json"]
+dest   = "$HOME/.config/wal/templates/"
+note   = "Only the Gradience preset template is used. Kvantum templates from this repo are not used."
+
+[git.pywalium]
+url    = "https://github.com/simonmader17/pywalium.git"
+action = "clone"
+dest   = "$HOME/githubs/pywalium"
+note   = "Chromium theme generator. Extension is loaded manually — see docs/manual-steps.md."
+
+# ═══════════════════════════════════════════════════════════════
+# APPLICATION PLUGINS — installed manually
+# ═══════════════════════════════════════════════════════════════
+
+[plugins.vscode]
+manual = [
+    { id = "dlasagno.wal-theme", name = "Wal Theme" },
+]
+
+[plugins.nvim]
+manual = [
+    { id = "RedsXDD/neopywal.nvim", name = "neopywal" },
+]
+
+[plugins.chromium]
+manual = [
+    { path = "$HOME/githubs/pywalium", action = "Load unpacked at chrome://extensions/" },
+]
+
+# ═══════════════════════════════════════════════════════════════
+# ENVIRONMENT
+# ═══════════════════════════════════════════════════════════════
+
+[env.xsessionrc]
+# Written to ~/.xsessionrc.
+# LightDM reads this file BEFORE starting the X session, so it is the
+# only reliable place to export variables to every session process.
+#
+# RATIONALE: ~/.profile is not read by LightDM, and zsh does not read
+# it either.
+variables = { PATH = "$HOME/.local/bin:$PATH", QT_QPA_PLATFORMTHEME = "", QT_STYLE_OVERRIDE = "kvantum" }
+
+# ═══════════════════════════════════════════════════════════════
+# SYSTEM SETTINGS
+# ═══════════════════════════════════════════════════════════════
+
+[gsettings]
+gtk-theme    = "adw-gtk3-dark"
+icon-theme   = "breeze-dark"
+cursor-theme = "Adwaita"
+font-name    = "UbuntuMono Nerd Font 12"
+
+# ═══════════════════════════════════════════════════════════════
+# ASSETS
+# ═══════════════════════════════════════════════════════════════
+
+[assets]
+# Default directory for wallpapers. Used only by bootstrap/60-first-run.sh
+# to find an initial wallpaper. Not configurable through preferences.toml.
+wallpapers_dir = "$HOME/Pictures/wallpapers"
