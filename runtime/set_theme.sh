@@ -8,7 +8,7 @@
 # Usage:
 #   kc-themeflow -i /path/to/wallpaper.jpg
 #   kc-themeflow -f /path/to/theme.json
-#   kc-themeflow -i wall.jpg --hover=border --no-wallpaper
+#   kc-themeflow -i wall.jpg --hover=text --no-wallpaper
 #
 # Options:
 #   -i <file>          Generate palette from image and set as wallpaper
@@ -26,33 +26,13 @@ readonly CONFIG_HOME="${XDG_CONFIG_HOME:-$HOME/.config}"
 readonly CACHE_HOME="${XDG_CACHE_HOME:-$HOME/.cache}"
 readonly WAL_CACHE="$CACHE_HOME/wal"
 
+readonly TOOLS_DIR="$SCRIPT_DIR/tools"
 readonly QTILE_COLORS_SCRIPT="$SCRIPT_DIR/qtile_colors.py"
 readonly KVANTUM_SCRIPT="$SCRIPT_DIR/kvantum_build.py"
 
 readonly GRADIENCE_PRESET="$HOME/.var/app/com.github.GradienceTeam.Gradience/config/presets/user/pywal.json"
-readonly PREFS_FILE="$HOME/.config/kc-themeflow/preferences.toml"
 
-# Read github_dir from preferences.toml, falling back to ~/githubs.
-read_github_dir() {
-    local default="$HOME/githubs"
-    [[ -f "$PREFS_FILE" ]] || { printf '%s\n' "$default"; return; }
-    local val
-    val="$(python3 - "$PREFS_FILE" <<'PY'
-import sys, tomllib
-try:
-    with open(sys.argv[1], "rb") as f:
-        data = tomllib.load(f)
-except Exception:
-    sys.exit(0)
-node = data.get("paths", {}).get("github_dir")
-if isinstance(node, str):
-    print(node)
-PY
-)"
-    printf '%s\n' "${val:-$default}"
-}
-
-readonly GITHUB_DIR="$(read_github_dir)"
+readonly GITHUB_DIR="$(python3 "$TOOLS_DIR/read_github_dir.py")"
 readonly PYWALIUM_DIR="$GITHUB_DIR/pywalium"
 
 # ─── Subcommand routing ───────────────────────────────────────
@@ -70,7 +50,7 @@ if [[ "${1:-}" == "tool" ]]; then
     shift || true
     case "$tool_name" in
         al-conv)
-            exec python3 "$SCRIPT_DIR/tools/convert_alacritty.py" "$@"
+            exec python3 "$TOOLS_DIR/convert_alacritty.py" "$@"
             ;;
         "")
             echo "Usage: kc-themeflow tool <name> [args]" >&2
@@ -88,7 +68,7 @@ fi
 # ─── Argument parsing ─────────────────────────────────────────
 MODE=""
 SOURCE=""
-HOVER="soft"
+HOVER="fill"
 NO_WALLPAPER=0
 
 usage() {
@@ -204,6 +184,20 @@ if [[ -f "$WAL_CACHE/pywal.json" ]]; then
     fi
 else
     warn "pywal.json not rendered. Is the Gradience template installed?"
+fi
+
+# ─── 7b. GTK selection color ──────────────────────────────────
+# adw-gtk3 hard-codes selection colors in its compiled CSS and does
+# not read theme_selected_bg_color. Append a CSS override at the end
+# of gtk.css so selections match the accent color.
+log "Setting GTK selection color..."
+gtk_css_files=()
+for ver in 3.0 4.0; do
+    gtk_css="$CONFIG_HOME/gtk-$ver/gtk.css"
+    [[ -f "$gtk_css" ]] && gtk_css_files+=("$gtk_css")
+done
+if (( ${#gtk_css_files[@]} > 0 )); then
+    python3 "$TOOLS_DIR/gtk_selection.py" "$WAL_CACHE/colors.json" "${gtk_css_files[@]}"
 fi
 
 # ─── 8. Qt via Kvantum ────────────────────────────────────────
