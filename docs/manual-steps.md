@@ -37,6 +37,12 @@ You can use a different extension, but the effect may differ.
 The `<github_dir>` is the clone directory chosen during install. Check
 `~/.config/kc-themeflow/preferences.toml` if unsure.
 
+**The theme does not appear in `chrome://extensions/`.** This is
+Chromium behavior, not a bug: browser themes are hidden from the
+extensions list by design. To confirm the theme loaded, open
+`chrome://settings/appearance` — the Theme field should read
+`Pywalium Theme`.
+
 After a theme change, restart Chromium to apply the new colors.
 
 ---
