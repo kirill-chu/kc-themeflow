@@ -76,7 +76,7 @@ python3 tools/convert_alacritty.py --input theme.yml --output theme.json
 | Alacritty | import from `current-theme.toml` |
 | Rofi | `@theme "current-theme.rasi"` |
 | Dunst | `~/.config/dunst/dunstrc` (generated) |
-| GTK 3/4 | Gradience preset + `adw-gtk3-dark` |
+| GTK 3/4 | generated `gtk.css` + `adw-gtk3-dark` |
 | Qt | Kvantum theme generated from `KvAdaptaDark` |
 | Neovim | via a pywal-aware colorscheme plugin |
 | Chromium | via the pywalium extension |

@@ -54,7 +54,6 @@ packages = [
     "qt-style-kvantum",
     "qt-style-kvantum-themes",
     "qt-style-kvantum-l10n",
-    "flatpak",
 ]
 
 [apt.optional]
@@ -85,19 +84,6 @@ installer_url = "https://astral.sh/uv/install.sh"
 [uv.tools]
 # Installed via `uv tool install <spec> <name>` — ends up in ~/.local/bin.
 pywal16 = "git+https://github.com/eylles/pywal16.git"
-
-# ═══════════════════════════════════════════════════════════════
-# FLATPAK
-# ═══════════════════════════════════════════════════════════════
-
-[flatpak.remote]
-name = "flathub"
-url  = "https://flathub.org/repo/flathub.flatpakrepo"
-
-[flatpak.apps]
-required = [
-    "com.github.GradienceTeam.Gradience",
-]
 
 # ═══════════════════════════════════════════════════════════════
 # GIT — repositories to clone
