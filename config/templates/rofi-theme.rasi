@@ -8,10 +8,10 @@
  * Rendered by pywal16 into ~/.cache/wal/rofi-theme.rasi,
  * then copied to ~/.config/rofi/current-theme.rasi.
  *
- * NOTE: pywal renders templates with Python str.format(), so every
- * literal { and } must be doubled ({{ and }}). Placeholders like
- * {background} and {color4} stay single. If you add new rules, keep
- * this in mind — otherwise pywal fails with KeyError.
+ * NOTE: pywal renders templates with Python str.format(). Literal
+ * braces must be doubled; placeholders like {background} and {color4}
+ * stay single. If you add new rules, keep this in mind — otherwise
+ * pywal fails with KeyError.
  */
 
 * {{
