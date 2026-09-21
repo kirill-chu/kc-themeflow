@@ -7,9 +7,14 @@
  *
  * Rendered by pywal16 into ~/.cache/wal/rofi-theme.rasi,
  * then copied to ~/.config/rofi/current-theme.rasi.
+ *
+ * NOTE: pywal renders templates with Python str.format(), so every
+ * literal { and } must be doubled ({{ and }}). Placeholders like
+ * {background} and {color4} stay single. If you add new rules, keep
+ * this in mind — otherwise pywal fails with KeyError.
  */
 
-* {
+* {{
     bg0: {background};
     fg0: {foreground};
 
@@ -18,6 +23,8 @@
 
     grey0: {color8};
 
+    /* Accent color — matches the active group in Qtile and selections
+       in Alacritty. See docs/themes.md, "Accent color". */
     selbg0: {color4};
     selfg0: {background};
 
@@ -30,114 +37,112 @@
     background-color: @bg0;
 
     window-border-color: {color5};
-}
+}}
 
-window {
+window {{
     height: 600;
     width: 600;
 
     border: 1;
     border-radius: 10;
     border-color: @window-border-color;
-}
+}}
 
-mainbox {
+mainbox {{
     spacing: 0;
     children: [inputbar, message, listview];
-}
+}}
 
-inputbar {
+inputbar {{
     color: @fg0;
     padding: 14;
     background-color: @bg1;
     border: 0;
     border-color: @window-border-color;
     border-radius: 0;
-}
+}}
 
-message {
+message {{
     padding: 10;
     background-color: @grey0;
-}
+}}
 
-listview {
+listview {{
     padding: 8;
     border-radius: 0 0 10 10;
     border: 2 2 2 2;
     border-color: @bg0;
     background-color: @bg0;
     dynamic: false;
-}
+}}
 
-textbox {
+textbox {{
     text-color: @fg0;
     background-color: inherit;
-}
+}}
 
-error-message {
+error-message {{
     border: 20 20 20 20;
-}
+}}
 
-entry {
+entry {{
     placeholder: "filter...";
     placeholder-color: @grey0;
-}
+}}
 
-entry, prompt, case-indicator {
+entry, prompt, case-indicator {{
     text-color: inherit;
     background-color: @bg1;
-}
+}}
 
-prompt {
+prompt {{
     margin: 0 10 0 0;
     text-color: @orange;
-}
+}}
 
-element {
+element {{
     padding: 5;
     vertical-align: 0.5;
     border-radius: 10;
     background-color: @bg0;
-}
+}}
 
-element.selected.normal {
+element.selected.normal {{
     background-color: @selbg0;
-}
+}}
 
-element-text.selected.normal {
+element-text.selected.normal {{
     text-color: @selfg0;
-}
+}}
 
-
-
-element.alternate.normal {
+element.alternate.normal {{
     background-color: inherit;
-}
+}}
 
-element.normal.active, element.alternate.active {
+element.normal.active, element.alternate.active {{
     background-color: @orange;
-}
+}}
 
-element.selected.active {
+element.selected.active {{
     background-color: @green;
-}
+}}
 
-element.normal.urgent, element.alternate.urgent {
+element.normal.urgent, element.alternate.urgent {{
     background-color: @red;
-}
+}}
 
-element.selected.urgent {
+element.selected.urgent {{
     background-color: @blue;
-}
+}}
 
-element-text, element-icon {
+element-text, element-icon {{
     size: 36;
     margin: 0 10 0 0;
     vertical-align: 0.5;
     background-color: inherit;
     text-color: @fg0;
-}
+}}
 
-element-text .active, element-text .urgent {
+element-text .active, element-text .urgent {{
     text-color: @bg0;
-}
+}}
