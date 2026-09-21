@@ -7,7 +7,6 @@
 #
 # Repositories cloned:
 #   adw-gtk3             -> meson build + install into ~/.local
-#   pywal16-libadwaita   -> only templates/pywal.json is copied
 #   pywalium             -> cloned as-is; extension loaded manually
 #
 # Idempotent: safe to run multiple times.
@@ -26,7 +25,6 @@ readonly PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 readonly DEPS_FILE="$PROJECT_ROOT/deps.toml"
 readonly PREFS_DIR="$HOME/.config/kc-themeflow"
 readonly PREFS_FILE="$PREFS_DIR/preferences.toml"
-readonly WAL_TEMPLATES_DIR="$HOME/.config/wal/templates"
 
 # ─── Output helpers ───────────────────────────────────────────
 readonly RED=$'\033[0;31m'
@@ -267,32 +265,6 @@ else
     fi
 fi
 
-# ─── pywal16-libadwaita ───────────────────────────────────────
-title "pywal16-libadwaita (Gradience template)"
-
-lib_url="$(read_toml "$DEPS_FILE" "git.pywal16-libadwaita.url")"
-lib_dir="$github_dir/pywal16-libadwaita"
-
-# Shallow clone: we only need one file from the current HEAD.
-ensure_repo "$lib_url" "$lib_dir" --shallow
-
-# Copy only the template we need
-template_src="$lib_dir/templates/pywal.json"
-template_dst="$WAL_TEMPLATES_DIR/pywal.json"
-
-if [[ ! -f "$template_src" ]]; then
-    fail "Template not found: $template_src"
-    exit 1
-fi
-
-mkdir -p "$WAL_TEMPLATES_DIR"
-if [[ -f "$template_dst" ]] && cmp -s "$template_src" "$template_dst"; then
-    ok "Template already up to date: $template_dst"
-else
-    cp -f "$template_src" "$template_dst"
-    ok "Template installed: $template_dst"
-fi
-
 # ─── pywalium ─────────────────────────────────────────────────
 title "pywalium (Chromium theme generator)"
 
@@ -314,7 +286,6 @@ banner "Done"
 
 printf "  Clone dir:  %s\n" "$github_dir"
 printf "  adw-gtk3:   %s\n" "$adw_dir"
-printf "  libadwaita: %s\n" "$lib_dir"
 printf "  pywalium:   %s\n" "$pyw_dir"
 
 printf "\n  Next step: ${BOLD}bootstrap/50-deploy-configs.sh${NC}\n\n"

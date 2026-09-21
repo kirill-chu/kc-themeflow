@@ -26,7 +26,7 @@ author = "kirill-chu"
 
 [paths]
 # Directory where external repositories are cloned
-# (adw-gtk3, pywal16-libadwaita, pywalium).
+# (adw-gtk3, pywalium).
 #
 # Leave empty to be prompted on first run. The chosen value is saved
 # to ~/.config/kc-themeflow/preferences.toml, which is outside the
@@ -95,13 +95,6 @@ tag    = "v5.10"
 action = "meson-install"
 prefix = "$HOME/.local"
 note   = "GTK3 theme emulating libadwaita. Required by Gradience. Pinned to v5.10 because newer versions need Dart Sass, which is not in Debian 13 apt."
-
-[git.pywal16-libadwaita]
-url    = "https://github.com/eylles/pywal16-libadwaita.git"
-action = "copy-files"
-files  = ["templates/pywal.json"]
-dest   = "$HOME/.config/wal/templates/"
-note   = "Only the Gradience preset template is used. Kvantum templates from this repo are not used."
 
 [git.pywalium]
 url    = "https://github.com/simonmader17/pywalium.git"

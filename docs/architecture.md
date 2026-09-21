@@ -35,7 +35,7 @@ The wrapper `~/.local/bin/kc-themeflow` calls
                   ├──▶ alacritty-theme.toml
                   ├──▶ rofi-theme.rasi
                   ├──▶ dunst-theme.dunstrc
-                  ├──▶ pywal.json (Gradience preset)
+                  ├──▶ pywal.json (GTK theme preset)
                   │
                   ▼
           ┌──────────────────┐

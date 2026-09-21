@@ -50,15 +50,13 @@ Cloned by `bootstrap/40-clone-github.sh`. Clone directory is configurable
 | Repository | Version | Why |
 |---|---|---|
 | [`adw-gtk3`](https://github.com/lassekongo83/adw-gtk3) | tag `v5.10` | GTK 3 theme; required by Gradience |
-| [`pywal16-libadwaita`](https://github.com/eylles/pywal16-libadwaita) | HEAD | source of `templates/pywal.json` |
 | [`pywalium`](https://github.com/simonmader17/pywalium) | HEAD | Chromium theme generator |
 
 `adw-gtk3` is pinned to `v5.10` because newer versions require Dart Sass,
 which is not in Debian 13 apt. `v5.10` builds with `sassc`, which is in
 apt.
 
-The Kvantum theme is not taken from `pywal16-libadwaita` — those templates
-are incomplete. It is generated from the system `KvAdaptaDark` by
+The Kvantum theme is generated from the system `KvAdaptaDark` by
 `runtime/kvantum_build.py`.
 
 ---
