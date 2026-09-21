@@ -192,6 +192,6 @@ printf "  tools:     %s\n" "${tool_names[*]:-none}"
 
 printf "  wal:       %s\n" "$(command -v wal)"
 
-printf "\n  Next step: ${BOLD}bootstrap/30-flatpak.sh${NC}\n\n"
+printf "\n  Next step: ${BOLD}bootstrap/40-clone-github.sh${NC}\n\n"
 
 exit 0

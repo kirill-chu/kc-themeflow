@@ -24,7 +24,6 @@ Installed by `bootstrap/10-apt-packages.sh`.
 | `qt-style-kvantum` | Kvantum style engine |
 | `qt-style-kvantum-themes` | KvAdaptaDark, base for our theme |
 | `qt-style-kvantum-l10n` | localization |
-| `flatpak` | install Gradience |
 
 **Optional** (installed if missing, skipped if present): `feh`, `qt6ct`,
 `alacritty`, `dunst`, `rofi`.
@@ -39,16 +38,6 @@ Installed by `bootstrap/20-uv-tools.sh`.
 - `pywal16` — from `git+https://github.com/eylles/pywal16.git`
 
 `uv` puts `wal` into `~/.local/bin`.
-
----
-
-## Flatpak
-
-Installed by `bootstrap/30-flatpak.sh`.
-
-- `com.github.GradienceTeam.Gradience` — applies the palette to GTK 3/4.
-
-Gradience is not in Debian 13. Flatpak is the only practical channel.
 
 ---
 

@@ -30,8 +30,6 @@ readonly TOOLS_DIR="$SCRIPT_DIR/tools"
 readonly QTILE_COLORS_SCRIPT="$SCRIPT_DIR/qtile_colors.py"
 readonly KVANTUM_SCRIPT="$SCRIPT_DIR/kvantum_build.py"
 
-readonly GRADIENCE_PRESET="$HOME/.var/app/com.github.GradienceTeam.Gradience/config/presets/user/pywal.json"
-
 readonly GITHUB_DIR="$(python3 "$TOOLS_DIR/read_github_dir.py")"
 readonly PYWALIUM_DIR="$GITHUB_DIR/pywalium"
 
@@ -172,33 +170,12 @@ pkill -x dunst 2>/dev/null || true
 sleep 0.2
 dunst >/dev/null 2>&1 &
 
-# ─── 7. GTK 3 / GTK 4 via Gradience ───────────────────────────
-log "Applying GTK theme via Gradience..."
-if [[ -f "$WAL_CACHE/pywal.json" ]]; then
-    mkdir -p "$(dirname "$GRADIENCE_PRESET")"
-    cp -f "$WAL_CACHE/pywal.json" "$GRADIENCE_PRESET"
-    if command -v flatpak >/dev/null; then
-        flatpak run --command=gradience-cli com.github.GradienceTeam.Gradience \
-            apply -n "pywal" --gtk both >/dev/null 2>&1 \
-            || warn "Gradience apply failed — is the flatpak installed?"
-    fi
-else
-    warn "pywal.json not rendered. Is the Gradience template installed?"
-fi
-
-# ─── 7b. GTK selection color ──────────────────────────────────
-# adw-gtk3 hard-codes selection colors in its compiled CSS and does
-# not read theme_selected_bg_color. Append a CSS override at the end
-# of gtk.css so selections match the accent color.
-log "Setting GTK selection color..."
-gtk_css_files=()
-for ver in 3.0 4.0; do
-    gtk_css="$CONFIG_HOME/gtk-$ver/gtk.css"
-    [[ -f "$gtk_css" ]] && gtk_css_files+=("$gtk_css")
-done
-if (( ${#gtk_css_files[@]} > 0 )); then
-    python3 "$TOOLS_DIR/gtk_selection.py" "$WAL_CACHE/colors.json" "${gtk_css_files[@]}"
-fi
+# ─── 7. GTK 3 / GTK 4 ─────────────────────────────────────────
+# Generate gtk.css for GTK3 and GTK4 from the pywal palette.
+# Replaces Gradience, which was archived upstream in 2024 and
+# depended on an unsupported Flatpak runtime.
+log "Generating GTK themes..."
+python3 "$TOOLS_DIR/gtk_theme.py"
 
 # ─── 8. Qt via Kvantum ────────────────────────────────────────
 log "Building Kvantum theme (hover=$HOVER)..."

@@ -26,7 +26,6 @@ readonly STEPS=(
     "00-preflight.sh"
     "10-apt-packages.sh"
     "20-uv-tools.sh"
-    "30-flatpak.sh"
     "40-clone-github.sh"
     "50-deploy-configs.sh"
     "60-first-run.sh"

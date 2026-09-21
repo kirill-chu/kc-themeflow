@@ -122,7 +122,6 @@ check_url() {
 
 check_url "deb.debian.org" "https://deb.debian.org"
 check_url "github.com"     "https://github.com"
-check_url "flathub.org"    "https://flathub.org"
 check_url "astral.sh"      "https://astral.sh"
 
 # ─── 4. Free disk space ───────────────────────────────────────
@@ -230,22 +229,7 @@ else
     warn "\$HOME/.local/bin is not in PATH (add it to ~/.xsessionrc)"
 fi
 
-# ─── 10. Flatpak ──────────────────────────────────────────────
-title "Flatpak"
-
-if command -v flatpak >/dev/null 2>&1; then
-    ok "flatpak $(flatpak --version 2>/dev/null | awk '{print $2}')"
-
-    if flatpak remote-list 2>/dev/null | grep -q '^flathub'; then
-        ok "flathub remote is configured"
-    else
-        warn "flathub remote is not configured (will be added by the bootstrap)"
-    fi
-else
-    fail "flatpak not found — required for Gradience"
-fi
-
-# ─── 11. Optional tools already present ───────────────────────
+# ─── 10. Optional tools already present ───────────────────────
 title "Optional tools (checked, not required by preflight)"
 
 for tool in feh qt6ct alacritty dunst rofi keepassxc kvantummanager; do
@@ -256,7 +240,7 @@ for tool in feh qt6ct alacritty dunst rofi keepassxc kvantummanager; do
     fi
 done
 
-# ─── 12. Existing kc-themeflow artifacts ─────────────────────
+# ─── 11. Existing kc-themeflow artifacts ─────────────────────
 title "Existing kc-themeflow artifacts"
 
 if [[ -f "$HOME/.config/qtile/custom_utils/colors.py" ]]; then

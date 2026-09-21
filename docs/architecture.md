@@ -49,7 +49,7 @@ The wrapper `~/.local/bin/kc-themeflow` calls
                .toml          theme.rasi
                    │
                    ▼
-              GTK 3 / GTK 4 via Gradience
+              GTK 3 / GTK 4 (gtk_theme.py)
                    │
                    ▼
               Chromium extension manifest
