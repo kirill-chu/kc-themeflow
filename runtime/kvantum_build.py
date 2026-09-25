@@ -41,7 +41,7 @@ def build_map(colors: dict, special: dict) -> dict:
         "#ffffffc8": FG + "c8",
         # svg — dark backgrounds
         "#000931": C0, "#141414": C0, "#141b1e": C0, "#192023": C0,
-        "#1e282d": BG, "#212b30": BG, "#212c31": BG, "#222d32": BG,
+        "#1e282d": BG, "#212b30": BG, "#212c31": C0, "#222d32": BG,
         "#252f35": BG, "#28343a": BG, "#293439": BG,
         "#304048": C0, "#314047": C0, "#39444a": C0,
         "#3d494f": C8, "#3e4a50": C8,
